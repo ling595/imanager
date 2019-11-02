@@ -1,0 +1,57 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+p{
+    display: inline-block;
+    font-size:18px;
+    font-weight: bold;
+    color: #33383d;
+}
+input{
+    border-radius: 5px;
+    border:2px solid cornflowerblue;
+
+}
+button{
+    border:1px solid cadetblue;
+}
+.wrap{
+    width: 100vw;
+    height: 100vh;
+    background: /*white;*/url("icon/zhe.jpg") no-repeat;
+    background-size: 100%;
+}
+.captain{
+    text-align: center;
+    color: #106ecc;
+}
+.info{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 50px;
+}
+#addstu{
+    width:70px;
+    height:30px;
+    position: absolute;
+    right:50px;
+    bottom: 5%;
+    font-weight: bolder;
+    border-radius: 5px;
+    color: #33383d;
+    font-size: 12px;
+}
+table{
+    text-align: center;
+    width:90%;
+    height:350px;
+    margin: 0 auto;
+    font-weight: bolder;
+    color:#107ecc;
+}
+tr:nth-child(1){
+    background-color: lightblue;
+}

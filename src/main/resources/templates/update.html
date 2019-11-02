@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>ADD</title>
+</head>
+<body>
+<form action="/stu/updates" th:action="@{/stu/updates}" method="POST" th:object="${student}">
+    <input type="hidden" name="uid" th:value="*{uid}">
+    学号：<input type="text" name="stuid" th:value="*{stuid}"><br>
+    姓名：<input type="text" name="sname"th:value="*{sname}"><br>
+    生日：<input type="date" name="birth" th:value="*{birth}"><br>
+    手机：<input type="text" name="cel" th:value="*{cel}"><br>
+    性别：<input type="text" name="sex"th:value="*{sex}"><br>
+    地址：<input type="text" name="address"th:value="*{address}"><br>
+    <input type="submit" value="提交" >
+</form>
+</body>
+</html>

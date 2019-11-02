@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登入页面</title>
+</head>
+<body>
+
+<div>
+    #foreach($vo in $vos)
+    <div>
+        <div><a>$!{vo.stuid}</a></div>
+        <div><a>$!{vo.uid}</a></div>
+        <div><a>$!{vo.sname}</a></div>
+        <div><a>$!{vo.sex}</a></div><br>
+        <div><a>$!{vo.address}</a></div>
+        <div><a>$!{vo.cel}</a></div>
+        <div><a>$!{vo.birth}</a></div><br>
+    </div>
+</div>
+</body>
+</html>

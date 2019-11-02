@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>查询页面</title>
+</head>
+<body>
+<table border="2">
+    <thead>
+    <tr>
+        <td>STUID</td>
+        <td>NAME</td>
+        <td>SEX</td>
+        <td>BIRTH</td>
+        <td>CEL</td>
+        <td>ADDRESS</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${vos.size()} eq 0">
+        <td colspan="3">没有用户信息！</td>
+    </tr>
+    <tr th:each="user:${vos}">
+        <td th:text="${user.stuid}"></td>
+        <td th:text="${user.sname}"></td>
+        <td th:text="${user.sex}"></td>
+        <td th:text="${user.birth}"></td>
+        <td th:text="${user.cel}"></td>
+        <td th:text="${user.address}"></td>
+<!--        <td>-->
+<!--            <a th:href="@{'/users/'+${user.uid}}" th:text="${user.sname}"></a>-->
+<!--        </td>-->
+        <td>
+            <a th:href="@{'stu/delete/'+${user.uid}}">删除</a>
+            <a th:href="@{'stu/update/'+${user.uid}}">修改</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <a th:href="@{/stu/add}">添加学生</a>
+</div>
+</body>
+</html>

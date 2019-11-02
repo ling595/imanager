@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="学生管理系统.css" rel="stylesheet">
+</head>
+<body>
+<div class="wrap">
+    <h1 class="captain">学生管理系统</h1>
+    <div class="info">
+        <p class="S-name">学生姓名:<input type="text" id="name">
+        <p class="S-age">学生年龄:<input type="text" id="age"></p>
+        <p class="S-sex">学生性别:<input type="radio" name="sex" id="male" checked value="男">男<input type="radio" id="female" name="sex" value="女">女</p>
+        <p class="S-score">考试成绩:<input type="text" id="score"></p>
+    </div>
+    <button id="addstu">添加学生</button><br><br>
+    <table id="stuInfo" border="" cellspacing="0"></table>
+</div>
+<script>
+    let tab=document.getElementById("stuInfo");
+    let addStu=document.getElementById("addstu");
+    let name=document.getElementById("name");
+    let age=document.getElementById("age");
+    let score=document.getElementById("score");
+    let sex=document.getElementsByName("sex");
+    let index=null;//记录修改时的下标值
+    // //初始化数据先为null，之后会从localstorage里面获取数据
+    let stuInfo=null;
+    //渲染数组
+    let render=function(stuInfo){
+        tab.innerHTML='';//首先重置table里面的内容，将其清空
+        if(stuInfo.length!==0){
+            let thead='<tr><td><b>学生姓名</b></td><td><b>学生年龄</b></td><td><b>学生性别</b></td><td><b>考试成绩</b></td><td><b>操作</b></td></tr>'
+            let tbody='';
+            for(let i=0;i<stuInfo.length;i++){
+                tbody+=`<tr>
+            <td>${stuInfo[i].name}</td>
+            <td>${stuInfo[i].age}</td>
+            <td>${stuInfo[i].sex}</td>
+            <td>${stuInfo[i].score}</td>
+            <td><button onclick=editStu(${i})>修改</button><button onclick=delStu(${i})>删除</button></td>
+       </tr>`
+            }
+            tab.innerHTML+=thead+tbody;
+        }
+        else{
+            tab.innerHTML='';
+        }
+    };
+    //JSON和数组相互转换函数，自动检测，如果传入的是JSON,那就转为数组;如果传入的是数组就转为JSON
+    let typeChange=function(a){
+        if(Array.isArray(a)){
+            let obj={};
+            for(let key in a){
+                obj[key]=a[key];
+            }
+            return obj;
+        }
+        else{
+            let arr=[];
+            for(let key in a){
+                arr[key]=a[key];
+            }
+            return arr;
+        }
+    };
+    window.onload=function(){
+        //第一次localStorage里面没有任何数据,所以我们做些初始化工作
+        if(localStorage.stuInfo===undefined){
+            let info={
+                0:{'name':'小张','age':20,'sex':'男','score':100},
+                1:{'name':'小刘','age':20,'sex':'男','score':100},
+                2:{'name':'小阳','age':20,'sex':'男','score':100}
+            };
+            localStorage.stuInfo=JSON.stringify(info);//将数据转换为字符串存入localStorage
+            stuInfo=typeChange(info)
+        }
+        else{
+            stuInfo=typeChange(JSON.parse(localStorage.stuInfo))
+        }
+        render(stuInfo);//渲染出数据
+    };
+    //根据表单控件的值新建个学生对象 因为新增和修改都会用到，所以单独提取出来
+    //该函数会返回建立好的学生对象
+    let makeNewStu=function(){
+        //获取单选框里的值
+        let sexValue=null;
+        for(let i=0;i<sex.length;i++){
+            if(sex[i].checked===true){
+                sexValue=sex[i].value;
+            }
+        }
+        //构成对象
+        let newStu={'name':name.value,'age':age.value,'sex':sexValue,'score':score.value};
+        return newStu;
+    };
+    addStu.addEventListener('click',function(){
+        if(addStu.innerHTML==='添加学生'){
+            if(name.value===''||age.value===''||score.value===''){
+                alert('信息不能为空');
+            }
+            else{
+                let newStu=makeNewStu();//创建一个新的学生对象
+                //将对象推入stuInfo数组
+                stuInfo.push(newStu);
+                //重新渲染
+                render(stuInfo);
+                //更新本地存储的数据先转换为JSON对象，然后再转为字符串
+                localStorage.stuInfo=JSON.stringify(typeChange(stuInfo));
+                //清空文本框
+                name.value="";
+                age.value="";
+                sex[0].checked=true;
+                score.value="";
+            }
+        }
+        else{
+            //下一步就是获取修改的信息
+            let newInfo=makeNewStu();//直接调用该函数获取表单的值即可
+            stuInfo.splice(index,1,newInfo);//对数值进行修改
+            render(stuInfo);//重新渲染
+            //更新本地存储数据 先转换为JSON对象，然后转换为字符串
+            localStorage.stuInfo=JSON.stringify(typeChange(stuInfo));
+            addStu.innerHTML='添加学生';
+            //清空文本框
+            name.value="";
+            age.value="";
+            score.value="";
+            sex[0].checked=true;
+        }
+    },false);
+    //如果使用3Q,可以直接使用on绑定事件，因为on默认自带事件委托，无论是一开始有的元素，还是后面新增的元素，都会被绑定事件
+    let delStu=function(i){
+        if(window.confirm('确定是否删除此学生')){
+            stuInfo.splice(i,1);//删除数组元素
+            render(stuInfo);//重新渲染
+            localStorage.stuInfo=JSON.stringify(typeChange(stuInfo));
+        }
+    };
+    let editStu=function(i){
+        addStu.innerHTML='确定修改';
+        name.value=stuInfo[i].name;
+        age.value=stuInfo[i].age;
+        if(stuInfo[i].sex==='男'){
+            sex[0].checked=true;
+        }
+        else{
+            sex[1].checked=true
+        }
+        score.value=stuInfo[i].score;
+        index=i
+    }
+</script>
+</body>
+</html>
