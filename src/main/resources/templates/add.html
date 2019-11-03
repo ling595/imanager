@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8"/>
     <title>ADD</title>
+    <link rel="stylesheet" href="./css/add.css">
 </head>
 <body>
-<form action="/stu/addStudent" method="POST">
-    学号：<input type="text" name="stuid"><br>
-    姓名：<input type="text" name="sname"><br>
-    生日：<input type="date" name="birth" ><br>
-    手机：<input type="text" name="cel" ><br>
-    性别：<input type="text" name="sex"><br>
-    地址：<input type="text" name="address"><br>
-    <input type="submit" value="提交" >
+<div class="add_student">添加学生信息</div>
+<form action="/stu/addStudent" method="POST" class="add">
+    <span>学号：</span> <input type="text" name="stuid"><br>
+    <span>姓名：</span> <input type="text" name="sname"><br>
+    <span>生日：</span> <input type="date" name="birth" ><br>
+    <span>手机：</span> <input type="text" name="cel" ><br>
+    <span>性别：</span> <input type="text" name="sex"><br>
+    <span>地址：</span> <input type="text" name="address"><br>
+    <input type="submit" value="提交" class="sub" >
 </form>
 </body>
 </html>

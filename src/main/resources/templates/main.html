@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8"/>
     <title>查询页面</title>
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-<table border="2">
+    <div class="stu">学生信息表</div>
+<table border="2" class="table">
     <thead>
     <tr>
-        <td>STUID</td>
-        <td>NAME</td>
-        <td>SEX</td>
-        <td>BIRTH</td>
-        <td>CEL</td>
-        <td>ADDRESS</td>
+        <td>学号</td>
+        <td>姓名</td>
+        <td>性别</td>
+        <td>出生日期</td>
+        <td>电话</td>
+        <td>住址</td>
+        <td>操作</td>
     </tr>
     </thead>
     <tbody>
@@ -37,7 +40,7 @@
     </tr>
     </tbody>
 </table>
-<div>
+<div class="add">
     <a th:href="@{/stu/add}">添加学生</a>
 </div>
 </body>
