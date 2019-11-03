@@ -1,20 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./font/iconfont.css">
 </head>
 <body>
-<h2 style="text-align:center; margin-bottom: 20px">用户登录</h2>
-
-<form action="/do_login" method="POST" class="form" style="text-align:center; margin-bottom: 20px">
-    <div class="modal-body">
-        账号: <input id="name" type="text" name="name"/><br>
-        密码: <input id="password" type="password" name="password"/><br>
-        <input type="submit" value="登录"/>
-        <input type="reset" value="重置"/>
+    <div class="whole">
+        <div class="login">
+            <p class="logo">学生登录系统</p>
+            <form action="/do_login" method="POST" class="boxlist">
+            <!-- <div id="ID_user_psw" class="boxlist" > -->
+                <div class="ID_form-item">
+                  <div class="ID_form-wrap">
+                    <span class="iconfont active">&#xe601;</span>
+                    <input class="ID_user-text" type="text" id="accountName" placeholder="邮箱/手机号/用户名">
+                    <i></i>
+                    <!-- <span id="code_msg">请输入4位字母、数字、下划线</span> -->
+                  </div>
+                </div>
+                <div class="ID_form-item">
+                  <div class="ID_form-wrap">
+                    <span class="iconfont active">&#xe6fa;</span>
+                    <input class="ID_psw-text" type="password" id="password" placeholder="密码">
+                    <i></i>
+                    <!-- <span id="code_msg">请输入4位字母、数字、下划线</span> -->
+                  </div>
+                </div>
+                <div id="submit" class="login_btn">登录</div>
+            
+            </form>
+        </div>
     </div>
-</form>
-
 </body>
 </html>
