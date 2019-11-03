@@ -48,14 +48,16 @@ public class StuController {
     public String updatesStu(HttpServletRequest request) throws ParseException {
 
         Student s = change(request);
-        int uid = studentService.getStuUidBySname(s.getSname()).getUid();
-        s.setUid(uid);
+        System.out.println("############"+s.getUid());
+        //int uid = studentService.getStuUidBySname(s.getSname()).getUid();
+        //s.setUid(uid);
         System.out.println(s.toString());
         studentService.update(s);
         return "redirect:/main";
     }
 
     private Student change(HttpServletRequest request) throws ParseException {
+        int uid = Integer.parseInt(request.getParameter("uid"));
         int stuid = Integer.parseInt(request.getParameter("stuid"));
         String sname = request.getParameter("sname");
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -67,6 +69,7 @@ public class StuController {
             return null;
         }
         Student student = new Student();
+        student.setUid(uid);
         student.setStuid(stuid);
         student.setSname(sname);
         student.setBirth(birth);

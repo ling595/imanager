@@ -6,10 +6,10 @@
 </head>
 <body>
 <form action="/stu/updates" th:action="@{/stu/updates}" method="POST" th:object="${student}">
-    <input type="hidden" name="uid" th:value="*{uid}">
+    编号：<input type="text" name="uid" th:value="*{uid}" readonly="true"><br>
     学号：<input type="text" name="stuid" th:value="*{stuid}"><br>
     姓名：<input type="text" name="sname"th:value="*{sname}"><br>
-    生日：<input type="date" name="birth" th:value="*{birth}"><br>
+    生日：<input type="date" name="birth" th:value="*{#dates.format(birth, 'yyyy-MM-dd')}"><br>
     手机：<input type="text" name="cel" th:value="*{cel}"><br>
     性别：<input type="text" name="sex"th:value="*{sex}"><br>
     地址：<input type="text" name="address"th:value="*{address}"><br>
